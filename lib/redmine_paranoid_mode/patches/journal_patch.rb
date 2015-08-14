@@ -7,7 +7,7 @@ module RedmineParanoidMode
 
           acts_as_paranoid
 
-          safe_attributes 'deleted_at'
+          belongs_to :issue, -> { with_deleted }
 
         end
       end
