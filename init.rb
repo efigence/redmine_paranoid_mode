@@ -9,5 +9,6 @@ end
 
 ActionDispatch::Callbacks.to_prepare do
   require 'redmine_paranoid_mode/patches/issue_patch'
+  require 'redmine_paranoid_mode/patches/issue_query_patch'
   require 'redmine_paranoid_mode/patches/journal_patch'
 end
