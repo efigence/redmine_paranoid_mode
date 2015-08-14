@@ -1,6 +1,6 @@
 module RedmineParanoidMode
   module Patches
-    module IssuePatch
+    module JournalPatch
       def self.included(base)
         base.class_eval do
           unloadable
@@ -15,7 +15,6 @@ module RedmineParanoidMode
   end
 end
 
-unless Issue.included_modules.include?(RedmineParanoidMode::Patches::IssuePatch)
-  Issue.send(:include, RedmineParanoidMode::Patches::IssuePatch)
+unless Journal.included_modules.include?(RedmineParanoidMode::Patches::JournalPatch)
+  Journal.send(:include, RedmineParanoidMode::Patches::JournalPatch)
 end
-
