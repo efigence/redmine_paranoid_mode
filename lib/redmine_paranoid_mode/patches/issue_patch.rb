@@ -7,16 +7,16 @@ module RedmineParanoidMode
 
           acts_as_paranoid
 
-          has_many :journals,  -> { with_deleted }, :as => :journalized, :dependent => :destroy, :inverse_of => :journalized
+          has_many :journals, :as => :journalized, :dependent => :destroy, :inverse_of => :journalized
 
           safe_attributes 'deleted_at'
 
           scope :visible, lambda {|*args|
-            joins(:project).
-            where(Issue.visible_condition(args.shift || User.current, *args))
             if User.current.admin?
               unscope(where: :deleted_at)
             end
+            joins(:project).
+            where(Issue.visible_condition(args.shift || User.current, *args))
           }
 
         end

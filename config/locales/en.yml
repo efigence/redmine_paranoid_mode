@@ -1,5 +1,5 @@
 # English strings go here for Rails i18n
 en:
   # my_label: "My label"
-  field_deleted: Deleted
+  field_deleted_at: Deleted at
   label_include_deleted_issues: Include deleted issues
