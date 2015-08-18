@@ -11,6 +11,14 @@ module RedmineParanoidMode
 
           safe_attributes 'deleted_at'
 
+          scope :visible, lambda {|*args|
+            joins(:project).
+            where(Issue.visible_condition(args.shift || User.current, *args))
+            if User.current.admin?
+              unscope(where: :deleted_at)
+            end
+          }
+
         end
       end
     end
