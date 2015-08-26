@@ -5,7 +5,7 @@ module RedmineParanoidMode
         base.class_eval do
           unloadable
 
-          acts_as_paranoid if self.respond_to?(:deleted_at)
+          acts_as_paranoid if self.attribute_method?(:deleted_at)
 
           safe_attributes 'deleted_at'
 
