@@ -1,1 +1,0 @@
-= redmine_paranoid_mode (work in progress - do not use!)
