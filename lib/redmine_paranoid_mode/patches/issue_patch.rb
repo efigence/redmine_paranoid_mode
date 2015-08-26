@@ -7,9 +7,9 @@ module RedmineParanoidMode
 
           acts_as_paranoid
 
-          has_many :journals, :as => :journalized, :dependent => :destroy, :inverse_of => :journalized
-
           safe_attributes 'deleted_at'
+          attr_accessor   :deleted_at
+          attr_accessible :deleted_at
 
           scope :visible, lambda {|*args|
             if User.current.admin?

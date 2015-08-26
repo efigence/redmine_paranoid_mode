@@ -19,7 +19,7 @@ Developed and tested on Redmine 3.1.0.
 Destroyed issues are not actually destroyed but only hidden. These are marked with a new column in issue model: deleted_at date.
 Destroyed issues are visible only to admin (filter for deleted_at is available in the issues panel).
 
-Based on [paranoia gem](https://github.com/radar/paranoia).
+Using [paranoia gem](https://github.com/radar/paranoia).
 
 ## License
 

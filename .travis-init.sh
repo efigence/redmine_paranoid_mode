@@ -98,7 +98,6 @@ run_install() {
   mkdir -p vendor/bundle
   bundle install --path vendor/bundle
 
-  bundle exec rake redmine:plugins:migrate $TRACE
   bundle exec rake db:migrate $TRACE
   bundle exec rake redmine:load_default_data REDMINE_LANG=en $TRACE
   bundle exec rake $GENERATE_SECRET $TRACE
