@@ -1,11 +1,15 @@
 require File.expand_path('../../test_helper', __FILE__)
 
 class IssueTest < ActiveSupport::TestCase
-  fixtures :issues
+  fixtures :users, :projects, :trackers, :issue_statuses, :projects_trackers, :enumerations
 
-  def test_deleted_issue_should_hide
-    issue = issues(:issues_001)
-    issue.save
+  def test_deleted_issue_should_only_hide
+    issue = Issue.create(subject: 'Test subject',
+      project: Project.first,
+      tracker: Tracker.first,
+      status: IssueStatus.first,
+      author: User.first,
+      priority: IssuePriority.first)
 
     assert_difference('Issue.only_deleted.count') do
       issue.destroy
