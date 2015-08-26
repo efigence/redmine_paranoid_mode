@@ -5,11 +5,9 @@ module RedmineParanoidMode
         base.class_eval do
           unloadable
 
-          acts_as_paranoid
+          acts_as_paranoid if self.respond_to?(:deleted_at)
 
           safe_attributes 'deleted_at'
-          attr_accessor   :deleted_at
-          attr_accessible :deleted_at
 
           scope :visible, lambda {|*args|
             if User.current.admin?
