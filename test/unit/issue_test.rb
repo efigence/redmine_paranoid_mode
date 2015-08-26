@@ -11,10 +11,10 @@ class IssueTest < ActiveSupport::TestCase
       author: User.first,
       priority: IssuePriority.first)
 
-    assert_difference('Issue.only_deleted.count') do
+    assert_no_difference('Issue.count') do
       issue.destroy
     end
-    assert_not_equal nil, Issue.only_deleted.last.deleted_at
+    assert_not_equal nil, Issue.last.deleted_at
   end
 
 end
