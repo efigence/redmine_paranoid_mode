@@ -1,4 +1,4 @@
-# Redmine Paranoid Mode plugin
+# Redmine Paranoid Mode plugin [![Build Status](https://travis-ci.org/efigence/redmine_paranoid_mode.svg?branch=master)](https://travis-ci.org/efigence/redmine_paranoid_mode)
 
 #### Plugin which adds paranoid mode to issues.
 
