@@ -30,7 +30,7 @@ class IssuesControllerTest < Redmine::IntegrationTest
     # issue.delete
     log_user("admin", "admin")
     get issue_path(issue)
-    byebug
+    # byebug
     assert_response :success
   end
 
