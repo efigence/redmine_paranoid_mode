@@ -7,6 +7,7 @@ class IssuesControllerTest < Redmine::IntegrationTest
     log_user("admin", "admin")
     get issues_path
     assert_response :success
+    byebug
     assert_select 'select#add_filter_select' do
       assert_select 'option[value=deleted_at]'
     end
