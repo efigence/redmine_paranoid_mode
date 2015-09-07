@@ -6,6 +6,7 @@ cache:
     - vendor/bundle
     - workspace/redmine/vendor/bundle
 rvm:
+  - 2.2.2
   - 2.1
   - 2.0
 env:
