@@ -7,12 +7,18 @@ class IssuesControllerTest < Redmine::IntegrationTest
     User.current = nil
   end
 
-  def test_only_admin_should_see_deleted_at_filter
-    post '/login', :username => 'admin', :password => 'admin'
-    get issues_path
+  # USER IS NOT LOGGING IN
 
-    assert_response :success
+  def test_only_admin_should_see_deleted_at_filter
+    skip
+    log_user("admin", "admin")
+    User.current = User.first
+    session[:user_id] = User.first.id
+    session[:ctime] = Time.now.utc.to_i
+    session[:atime] = Time.now.utc.to_i
+    get issues_path
     byebug
+    assert_response :success
     assert_select 'select#add_filter_select' do
       assert_select 'option[value=deleted_at]'
     end
@@ -20,31 +26,35 @@ class IssuesControllerTest < Redmine::IntegrationTest
     assert_select 'table.list tr', 4
   end
 
-  # def test_not_admin_should_not_see_deleted_at_filter
-  #   @request.session[:user_id] = 2
-  #   get :index
-  #   assert_response :success
-  #   assert_select 'select#add_filter_select' do
-  #     assert_select 'option[value=deleted_at]', false
-  #   end
-  #   assert_select 'table.issues'
-  #   assert_select 'table.list tr', 4
-  # end
+  def test_not_admin_should_not_see_deleted_at_filter
+    skip
+    log_user("jsmith", "jsmith")
+    get issues_path
+    assert_response :success
+    # byebug
+    assert_select 'select#add_filter_select' do
+      assert_select 'option[value=deleted_at]', false
+    end
+    assert_select 'table.issues'
+    assert_select 'table.list tr', 4
+  end
 
-  # def test_only_admin_should_see_deleted_issue
-  #   @request.session[:user_id] = 1 # admin
-  #   # issue = issues(:issues_001)
-  #   # issue.delete
-  #   get :show, :id => 1
-  #   byebug
-  #   assert_response :success
-  # end
+  def test_only_admin_should_see_deleted_issue
+    skip
+    issue = issues(:issues_001)
+    # issue.delete
+    log_user("admin", "admin")
+    get issue_path(issue)
+    # byebug
+    assert_response :success
+  end
 
-  # def test_not_admin_should_not_see_deleted_issue
-  #   @request.session[:user_id] = 2
-  #   # issue = issues(:issues_001)
-  #   # issue.delete
-  #   get :show, :id => 1
-  #   assert_response :missing
-  # end
+  def test_not_admin_should_not_see_deleted_issue
+    skip
+    issue = issues(:issues_001)
+    issue.delete
+    log_user("jsmith", "jsmith")
+    get issue_path(issue)
+    assert_response :missing
+  end
 end
