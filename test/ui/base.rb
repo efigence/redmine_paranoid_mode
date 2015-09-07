@@ -20,17 +20,13 @@ require 'capybara/rails'
 
 Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|
-  # Use the following driver definition to test locally using Chrome
-  # (also requires chromedriver to be in PATH)
-  # Capybara::Selenium::Driver.new(app, :browser => :chrome)
-  # Add :switches => %w[--lang=en] to force default browser locale to English
-  # Default for Selenium remote driver is to connect to local host on port 4444
-  # This can be change using :url => 'http://localhost:9195' if necessary
-  # PhantomJS 1.8 now directly supports Webdriver Wire API,
-  # simply run it with `phantomjs --webdriver 4444`
-  # Add :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.internet_explorer)
-  # to run on Selenium Grid Hub with IE
-  Capybara::Selenium::Driver.new(app, :browser => :remote)
+
+  custom_profile = Selenium::WebDriver::Firefox::Profile.new
+
+  # Turn off the super annoying popup!
+  custom_profile["network.http.prompt-temp-redirect"] = false
+
+  Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => custom_profile)
 end
 
 Capybara.run_server = true #Whether start server when testing
