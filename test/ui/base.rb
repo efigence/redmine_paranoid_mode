@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 require 'capybara/rails'
 
-Capybara.default_driver = :rack_test
+Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|
 
   custom_profile = Selenium::WebDriver::Firefox::Profile.new

@@ -12,6 +12,9 @@ rvm:
 env:
   - REDMINE_VERSION=3.0.3 VERBOSE=no DB=mysql
   - REDMINE_VERSION=3.1.0 VERBOSE=no DB=mysql
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script:
   - export PLUGIN=redmine_paranoid_mode
   - export WORKSPACE=$(pwd)/workspace
