@@ -18,9 +18,15 @@
 require File.expand_path('../../test_helper', __FILE__)
 require 'capybara/rails'
 
-Capybara.default_driver = :rack_test
+Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|
-  Capybara::Selenium::Driver.new(app, :browser => :firefox)
+
+  custom_profile = Selenium::WebDriver::Firefox::Profile.new
+
+  # Turn off the super annoying popup!
+  custom_profile["network.http.prompt-temp-redirect"] = false
+
+  Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => custom_profile)
 end
 
 Capybara.run_server = true #Whether start server when testing
