@@ -30,7 +30,7 @@ Capybara.register_driver :selenium do |app|
   # simply run it with `phantomjs --webdriver 4444`
   # Add :desired_capabilities => Selenium::WebDriver::Remote::Capabilities.internet_explorer)
   # to run on Selenium Grid Hub with IE
-  Capybara::Selenium::Driver.new(app, :browser => :firefox)
+  Capybara::Selenium::Driver.new(app, :browser => :remote)
 end
 
 Capybara.run_server = true #Whether start server when testing
