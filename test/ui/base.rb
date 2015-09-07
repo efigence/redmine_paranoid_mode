@@ -49,6 +49,7 @@ module Redmine
       # Stop ActiveRecord from wrapping tests in transactions
       # Transactional fixtures do not work with Selenium tests, because Capybara
       # uses a separate server thread, which the transactions would be hidden
+      self.fixture_path = "#{::Rails.root}/plugins/redmine_paranoid_mode/test/fixtures"
       self.use_transactional_fixtures = false
 
       # Should not depend on locale since Redmine displays login page

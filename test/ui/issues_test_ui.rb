@@ -9,7 +9,7 @@ class Redmine::UiTest::IssuesTest < Redmine::UiTest::Base
     find_field('add_filter_select').click
     assert page.has_content?('Deleted at')
     find_field('add_filter_select').click
-    page.assert_selector('tr', :count => 14)
+    page.assert_selector('table.list.issues tbody tr', :count => Issue.count)
   end
 
   def test_not_admin_should_not_see_deleted_at_filter
@@ -18,7 +18,7 @@ class Redmine::UiTest::IssuesTest < Redmine::UiTest::Base
     find_field('add_filter_select').click
     assert page.has_no_content?('Deleted at')
     find_field('add_filter_select').click
-    page.assert_selector('tr', :count => 14)
+    page.assert_selector('table.list.issues tbody tr', :count => Issue.count)
   end
 
   def test_only_admin_should_see_deleted_issue
