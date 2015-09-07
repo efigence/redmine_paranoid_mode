@@ -11,6 +11,9 @@ rvm:
 env:
   - REDMINE_VERSION=3.0.3 VERBOSE=no DB=mysql
   - REDMINE_VERSION=3.1.0 VERBOSE=no DB=mysql
+before_script:
+  - export DISPLAY=:99.0
+  - sh -e /etc/init.d/xvfb start
 script:
   - export PLUGIN=redmine_paranoid_mode
   - export WORKSPACE=$(pwd)/workspace
@@ -21,4 +24,3 @@ script:
   - bash -x ./.travis-init.sh -i || exit 1
   - bash -x ./.travis-init.sh -t || exit 1
   - bash -x ./.travis-init.sh -u || exit 1
-  - xvfb-run --server-args="-screen 0 1024x768x24" bundle exec test/ui/issues_test_ui.rb
