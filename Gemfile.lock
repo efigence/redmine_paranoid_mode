@@ -49,6 +49,9 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activemodel (= 4.2.4)
+  activerecord (= 4.2.4)
+  activesupport (= 4.2.4)
   capybara-webkit
   paranoia
   safe_attributes

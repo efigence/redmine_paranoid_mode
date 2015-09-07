@@ -65,7 +65,7 @@ run_tests() {
   fi
 
   script -e -c "bundle exec rake redmine:plugins:test NAME="$PLUGIN $VERBOSE
-  script -e -c "bundle exec ruby plugins/redmine_paranoid_mode/test/ui/issues_test_ui.rb"
+  script -e -c "RAILS_ENV=test bundle exec ruby plugins/redmine_paranoid_mode/test/ui/issues_test_ui.rb"
 }
 
 uninstall() {
