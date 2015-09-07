@@ -33,7 +33,7 @@ Capybara.run_server = true #Whether start server when testing
 Capybara.server_port = 4444
 
 # default: 2
-Capybara.default_wait_time = 2
+Capybara.default_wait_time = 15
 
 module Redmine
   module UiTest
