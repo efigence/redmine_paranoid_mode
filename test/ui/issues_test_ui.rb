@@ -12,11 +12,16 @@ class Redmine::UiTest::IssuesTest < Redmine::UiTest::Base
       find('input[name=login]').click
     end
     assert_equal '/my/page', current_path
+    puts '====================='
+    puts find('#loggedas').text
   end
 
   def test_only_admin_should_see_deleted_at_filter
     log_user('admin', 'admin')
-    visit '/issues'
+    visit '/issues.csv'
+    byebug
+    puts '***********************************'
+    puts find('#loggedas').text
     find_field('add_filter_select').click
     assert page.has_content?('Deleted at')
     find_field('add_filter_select').click
