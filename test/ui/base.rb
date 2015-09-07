@@ -20,13 +20,7 @@ require 'capybara/rails'
 
 Capybara.default_driver = :selenium
 Capybara.register_driver :selenium do |app|
-
-  custom_profile = Selenium::WebDriver::Firefox::Profile.new
-
-  # Turn off the super annoying popup!
-  custom_profile["network.http.prompt-temp-redirect"] = false
-
-  Capybara::Selenium::Driver.new(app, :browser => :firefox, :profile => custom_profile)
+  Capybara::Selenium::Driver.new(app, :browser => :firefox)
 end
 
 Capybara.run_server = true #Whether start server when testing
@@ -45,21 +39,11 @@ module Redmine
       # Stop ActiveRecord from wrapping tests in transactions
       # Transactional fixtures do not work with Selenium tests, because Capybara
       # uses a separate server thread, which the transactions would be hidden
-      self.fixture_path = "test/fixtures"
+      self.fixture_path = "#{::Rails.root}/plugins/redmine_paranoid_mode/test/fixtures"
       self.use_transactional_fixtures = false
 
       # Should not depend on locale since Redmine displays login page
       # using default browser locale which depend on system locale for "real" browsers drivers
-      def log_user(login, password)
-        visit '/my/page'
-        assert_equal '/login', current_path
-        within('#login-form form') do
-          fill_in 'username', :with => login
-          fill_in 'password', :with => password
-          find('input[name=login]').click
-        end
-        assert_equal '/my/page', current_path
-      end
 
       teardown do
         Capybara.reset_sessions!    # Forget the (simulated) browser state
