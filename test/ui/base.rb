@@ -18,7 +18,7 @@
 require File.expand_path('../../test_helper', __FILE__)
 require 'capybara/rails'
 
-Capybara.default_driver = :selenium
+Capybara.default_driver = :rack_test
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, :browser => :firefox)
 end
@@ -27,8 +27,7 @@ Capybara.run_server = true #Whether start server when testing
 Capybara.server_port = 4444
 
 # default: 2
-Capybara.default_wait_time = 7
-
+Capybara.default_wait_time = 2
 
 module Redmine
   module UiTest

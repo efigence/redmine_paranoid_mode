@@ -98,6 +98,7 @@ run_install() {
   # install gems
   mkdir -p vendor/bundle
   bundle install --path vendor/bundle
+  bundle update
 
   bundle exec rake db:migrate $TRACE
   bundle exec rake redmine:load_default_data REDMINE_LANG=en $TRACE
